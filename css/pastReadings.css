@@ -1,0 +1,216 @@
+﻿#screen-past-readings .content {
+    padding: var(--space-3);
+    color: var(--color-text-primary);
+}
+
+.empty-msg {
+    text-align: center;
+    margin-top: 2rem;
+    opacity: 0.7;
+    font-size: var(--fs-sm);
+}
+
+.past-readings-controls {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 1rem;
+}
+
+.sort-bar {
+    display: flex;
+    align-items: center; 
+    gap: 1rem;
+}
+
+.sort-bar label {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.sort-bar label {
+    font-size: var(--fs-xs);
+    opacity: 0.9;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    white-space: nowrap;
+}
+
+.sort-bar select {
+    background: var(--color-surface);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border);
+    padding: 0.4rem 0.6rem;
+    border-radius: var(--radius-md);
+    font-size: var(--fs-xs);
+}
+
+.past-readings-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.past-readings-card {
+    position: relative;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 0.65rem 0.75rem 2rem;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.past-readings-card:hover {
+    background: var(--color-surface-strong);
+}
+
+.past-readings-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.25rem;
+}
+
+.past-readings-date {
+    font-size: var(--fs-xxs);
+    opacity: 0.8;
+}
+
+.past-readings-rating {
+    font-size: var(--fs-xs);
+    color: var(--color-gold);
+}
+
+.past-readings-question {
+    margin: 0;
+    margin-right: 0.5rem;
+    font-size: var(--fs-sm);
+    line-height: 1.25;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.past-readings-delete-btn {
+    position: absolute;
+    bottom: 0.4rem;
+    left: 0.6rem;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    width: 1rem;
+    height: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.past-readings-delete-btn::before {
+    content: "";
+    width: 0.65rem;
+    height: 0.55rem;
+    background: var(--color-gold);
+    border-radius: 0.15rem;
+    display: block;
+}
+
+.past-readings-delete-btn::after {
+    content: "";
+    position: absolute;
+    top: -0.08rem;
+    width: 0.75rem;
+    height: 0.15rem;
+    background: var(--color-gold);
+    border-radius: 0.15rem;
+}
+
+.past-readings-delete-btn span {
+    position: absolute;
+    top: -0.28rem;
+    width: 0.3rem;
+    height: 0.12rem;
+    background: var(--color-gold);
+    border-radius: 0.15rem;
+}
+
+.past-readings-review-btn {
+    position: absolute;
+    bottom: 0.35rem;
+    right: 0.6rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-primary);
+    padding: 0.35rem 0.6rem;
+    border-radius: var(--radius-md);
+    font-size: var(--fs-xs);
+    cursor: pointer;
+}
+
+.past-readings-review-btn:hover {
+    background: var(--color-surface-strong);
+}
+
+.past-readings-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: var(--space-3);
+}
+
+.past-readings-pagination button {
+    background: var(--color-surface);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border);
+    padding: 0.45rem 0.75rem;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-size: var(--fs-xs);
+}
+
+.past-readings-pagination button:disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+.past-readings-admin {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: var(--space-3);
+    padding-top: var(--space-2);
+    border-top: 1px solid var(--color-border);
+}
+
+.past-readings-admin .btn-secondary,
+.past-readings-admin .btn-danger {
+    min-height: auto;
+    padding: 0.45rem 0.75rem;
+    font-size: var(--fs-xxs);
+    text-transform: none;
+    letter-spacing: normal;
+    font-weight: 500;
+}
+
+.past-readings-admin .btn-danger {
+    background: transparent;
+    color: #e57373;
+    border: 1px solid #e57373;
+}
+
+.past-readings-admin .btn-danger:hover,
+.past-readings-admin .btn-danger:focus-visible {
+    background: rgba(229, 115, 115, 0.12);
+    transform: translateY(-1px);
+}
+
+#page-info {
+    font-size: var(--fs-xs);
+    opacity: 0.8;
+}

@@ -1,0 +1,73 @@
+﻿#screen-tap-to-cast .content {
+    text-align: center;
+    padding: var(--space-3);
+}
+
+/* Tap button: extra large for easy casting */
+.cast-btn-top {
+    display: block;
+    margin: 0 auto var(--space-4);
+    width: min(100%, 420px);
+    padding: 1.25rem 1.5rem;
+    font-size: var(--fs-lg);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+}
+
+/* Restart button: full width on mobile, normal width on desktop */
+.restart-btn {
+    display: block;
+    margin: var(--space-4) auto 0;
+    width: 100%;
+    max-width: 420px;
+    padding: 0.9rem 1.1rem;
+    font-size: var(--fs-sm);
+}
+
+@media (min-width: 640px) {
+    .restart-btn {
+        width: min(90%, 360px);
+    }
+}
+
+#coin-row {
+    margin: var(--space-4) 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.coin {
+    display: inline-block;
+    width: 3.5rem;
+    height: 3.5rem;
+    transition: transform 0.8s ease, opacity 0.2s ease;
+    transform-origin: center bottom;
+}
+
+.coin.flip {
+    transform: rotateY(720deg);
+    opacity: 0.6;
+}
+
+#cast-lines-display {
+    margin-top: var(--space-3);
+    text-align: left;
+    display: inline-block;
+    width: 100%;
+    max-width: 420px;
+}
+
+.line-slot {
+    height: 2rem;
+    font-size: 1.45rem;
+    opacity: 0.25;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    margin: 0.2rem 0;
+}
+
+.line-slot.reveal {
+    opacity: 1;
+    transform: translateY(-4px);
+}

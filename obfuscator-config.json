@@ -1,0 +1,29 @@
+{
+  "compact": true,
+  "identifierNamesGenerator": "hexadecimal",
+  "renameGlobals": false,
+  "renameProperties": false,
+
+  "stringArray": true,
+  "stringArrayEncoding": [
+    "base64"
+  ],
+  "stringArrayThreshold": 1,
+
+  "splitStrings": true,
+  "splitStringsChunkLength": 8,
+
+  "numbersToExpressions": true,
+  "simplify": true,
+
+  "unicodeEscapeSequence": false,
+
+  "transformObjectKeys": false,
+
+  "selfDefending": false,
+  "debugProtection": false,
+  "disableConsoleOutput": false,
+
+  "controlFlowFlattening": false,
+  "deadCodeInjection": false
+}

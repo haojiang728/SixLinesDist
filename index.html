@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="version" content="20260628">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Six Lines I Ching</title>
+    <link rel="stylesheet" href="css/design-system.css?v=20260628">
+    <link rel="stylesheet" href="css/main.css?v=20260628">
+    <link rel="stylesheet" href="css/chart.css?v=20260628">
+    <link rel="stylesheet" href="css/tapToCast.css?v=20260628">
+    <link rel="stylesheet" href="css/pastReadings.css?v=20260628">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1a1a1a">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+</head>
+<body class="no-scroll">
+    <!-- SPLASH SCREEN -->
+    <div class="splash-container" id="splash-screen">
+        <!-- Simple Hexagram Logo -->
+        <div class="logo-hexagram">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+
+        <h1 class="title">Six Lines</h1>
+        <p class="subtitle">I Ching Divination</p>
+    </div>
+
+    <div id="app-container">
+        <!-- LANDING SCREEN -->
+        <div id="screen-landing" class="screen">
+            <header class="hero">
+                <h1 class="app-title">Six Lines I Ching</h1>
+                <p class="subtitle">Divination in the Wen Wang Gua Tradition</p>
+            </header>
+
+            <main class="menu-section">
+                <button id="btn-landing-new-reading" class="btn-primary">New Reading</button>
+                <button id="btn-landing-history" class="btn-secondary">Past Readings</button>
+                <button id="btn-landing-about" class="btn-secondary">About Six Lines</button>
+            </main>
+
+            <footer class="app-footer">
+                <button id="btn-landing-settings" class="icon-btn">
+                    <span class="icon">⚙</span>
+                    <span>Settings</span>
+                </button>
+                <button id="btn-landing-help" class="icon-btn">
+                    <span class="icon">?</span>
+                    <span>Help</span>
+                </button>
+            </footer>
+        </div>
+
+        <!-- NEW READING SCREEN -->
+        <div id="screen-new-reading" class="screen hidden">
+            <header class="screen-header">
+                <button id="btn-new-reading-back" class="back-btn">←</button>
+                <h2>New Reading</h2>
+                <button id="btn-new-reading-home" class="home-btn"></button>
+            </header>
+
+            <div class="content">
+
+                <!-- QUESTION INPUT -->
+                <div class="input-group">
+                    <label for="question-input">What is your question?</label>
+                    <textarea id="question-input" placeholder="Enter your inquiry..." rows="8"></textarea>
+                </div>
+
+                <!-- CASTING DATE + PILLARS -->
+                <div class="date-pillar-section">
+
+                    <div class="casting-date-header">
+                        <h3 class="section-title">Casting Date</h3>
+                        <button id="casting-today-btn" class="today-btn">Today</button>
+                    </div>
+                    <div class="triple-row">
+                        <select id="casting-year" class="small-select"></select>
+                        <select id="casting-month" class="small-select"></select>
+                        <select id="casting-day" class="small-select"></select>
+                    </div>
+
+                    <h3 class="section-title">Pillars</h3>
+                    <div class="triple-row">
+                        <select id="pillar-month-branch" class="small-select"></select>
+                        <select id="pillar-day-stem" class="small-select"></select>
+                        <select id="pillar-day-branch" class="small-select"></select>
+                    </div>
+                </div>
+
+                <!-- CAST METHOD BUTTONS -->
+                <div class="screen-buttons cast-methods">
+                    <button id="tap-to-cast-btn" class="btn-primary">Tap to Cast</button>
+                    <button id="btn-manual-entry" class="btn-secondary">Enter Hexagram Manually</button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- TAP TO CAST SCREEN -->
+        <div id="screen-tap-to-cast" class="screen hidden">
+            <header class="screen-header">
+                <button id="btn-tap-to-cast-back" class="back-btn">←</button>
+                <h2>Tap to Cast</h2>
+                <button id="btn-tap-to-cast-home" class="home-btn"></button>
+            </header>
+
+            <div class="content">
+                <!-- Tap Button at Top -->
+                <button id="btn-cast-tap" class="btn-primary cast-btn-top">
+                    Tap to cast line 1
+                </button>
+
+                <!-- Coin Animation Row -->
+                <div id="coin-row">
+                    <img class="coin" id="coin-1" src="images/coin-head.png" alt="Coin">
+                    <img class="coin" id="coin-2" src="images/coin-head.png" alt="Coin">
+                    <img class="coin" id="coin-3" src="images/coin-head.png" alt="Coin">
+                </div>
+
+                <!-- Six Lines Display -->
+                <div id="cast-lines-display">
+                    <div class="line-slot" id="cast-line-6"></div>
+                    <div class="line-slot" id="cast-line-5"></div>
+                    <div class="line-slot" id="cast-line-4"></div>
+                    <div class="line-slot" id="cast-line-3"></div>
+                    <div class="line-slot" id="cast-line-2"></div>
+                    <div class="line-slot" id="cast-line-1"></div>
+                </div>
+
+                <!-- Restart Button -->
+                <div class="screen-buttons">
+                    <button id="btn-cast-reset" class="btn-secondary restart-btn">
+                        Restart Casting
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- MANUAL ENTRY SCREEN -->
+        <div id="screen-manual-entry" class="screen hidden">
+            <header class="screen-header">
+                <button id="btn-manual-entry-back" class="back-btn">←</button>
+                <h2>Manual Entry</h2>
+                <button id="btn-manual-entry-home" class="home-btn"></button>
+            </header>
+            <div class="content">
+                <p id="link-how-to-cast" class="popup-link">How to Cast a Hexagram?</p>
+
+                <div class="manual-lines-container">
+                    <!-- Line 6 (Top) -->
+                    <div class="line-input-row">
+                        <label>Line 6 (Last Toss)</label>
+                        <select id="manual-line-6" class="line-select">
+                            <option value="8">" - 2 Heads 1 Tail</option>
+                            <option value="6">X - 3 Tails</option>
+                            <option value="7">' - 1 Head 2 Tails</option>
+                            <option value="9">O - 3 Heads</option>
+                        </select>
+                    </div>
+                    <!-- Line 5 -->
+                    <div class="line-input-row">
+                        <label>Line 5</label>
+                        <select id="manual-line-5" class="line-select">
+                            <option value="8">" - 2 Heads 1 Tail</option>
+                            <option value="6">X - 3 Tails</option>
+                            <option value="7">' - 1 Head 2 Tails</option>
+                            <option value="9">O - 3 Heads</option>
+                        </select>
+                    </div>
+                    <!-- Line 4 -->
+                    <div class="line-input-row">
+                        <label>Line 4</label>
+                        <select id="manual-line-4" class="line-select">
+                            <option value="8">" - 2 Heads 1 Tail</option>
+                            <option value="6">X - 3 Tails</option>
+                            <option value="7">' - 1 Head 2 Tails</option>
+                            <option value="9">O - 3 Heads</option>
+                        </select>
+                    </div>
+                    <!-- Line 3 -->
+                    <div class="line-input-row">
+                        <label>Line 3</label>
+                        <select id="manual-line-3" class="line-select">
+                            <option value="8">" - 2 Heads 1 Tail</option>
+                            <option value="6">X - 3 Tails</option>
+                            <option value="7">' - 1 Head 2 Tails</option>
+                            <option value="9">O - 3 Heads</option>
+                        </select>
+                    </div>
+                    <!-- Line 2 -->
+                    <div class="line-input-row">
+                        <label>Line 2</label>
+                        <select id="manual-line-2" class="line-select">
+                            <option value="8">" - 2 Heads 1 Tail</option>
+                            <option value="6">X - 3 Tails</option>
+                            <option value="7">' - 1 Head 2 Tails</option>
+                            <option value="9">O - 3 Heads</option>
+                        </select>
+                    </div>
+                    <!-- Line 1 (Bottom) -->
+                    <div class="line-input-row">
+                        <label>Line 1 (First Toss)</label>
+                        <select id="manual-line-1" class="line-select">
+                            <option value="8">" - 2 Heads 1 Tail</option>
+                            <option value="6">X - 3 Tails</option>
+                            <option value="7">' - 1 Head 2 Tails</option>
+                            <option value="9">O - 3 Heads</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="screen-buttons">
+                    <button class="btn-primary confirm-btn">Confirm Reading</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- CHART SCREEN -->
+        <div id="screen-chart" class="screen hidden">
+            <header class="screen-header">
+                <button id="btn-chart-back" class="back-btn">←</button>
+                <h2>Hexagram Chart</h2>
+                <button id="btn-chart-home" class="home-btn"></button>
+            </header>
+            <div class="content">
+                <div id="chart-container"></div>
+                <div class="screen-buttons chart-actions">
+                    <button id="btn-chart-review" class="btn-primary">Review</button>
+                    <button id="btn-ai-interpretation" class="btn-secondary">AI Interpretation</button>
+                    <button id="btn-copy-chart-text" class="btn-secondary">Copy Chart as Text</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI INTERPRETATION SCREEN -->
+        <div id="screen-ai-interpretation" class="screen hidden">
+            <header class="screen-header">
+                <button id="btn-ai-interpretation-back" class="back-btn">←</button>
+                <h2>AI Interpretation</h2>
+                <button id="btn-ai-interpretation-home" class="home-btn"></button>
+            </header>
+
+            <div class="content ai-interpretation-content">
+
+                <div class="ai-interpretation-display">
+                    <div class="ai-text-row">
+                        <textarea id="ai-interpretation-textarea" readonly></textarea>
+                    </div>
+                </div>
+
+                <div class="ai-options">
+                    <label class="option-item">
+                        <input type="radio" id="option-plain" name="ai-option" value="plain" checked>
+                        Plain‑Language Judgment (watch 1 ad)
+                    </label>
+
+                    <label class="option-item">
+                        <input type="radio" id="option-full" name="ai-option" value="full">
+                        Full Six Line analysis (watch 2 ads)
+                    </label>
+                </div>
+
+                <div class="advanced-options">
+                    <button id="btn-toggle-advanced" type="button" aria-expanded="false" class="btn-toggle">
+                        Advanced option
+                    </button>
+
+                    <div id="advanced-content" class="advanced-content hidden">
+
+                        <div class="advanced-row">
+                            <label for="god-override">Use God Override</label>
+                            <select id="god-override" class="small-select">
+                                <option value="determined">Auto</option>
+                                <option value="brother">Brother</option>
+                                <option value="children">Children</option>
+                                <option value="wealth">Wealth</option>
+                                <option value="officer">Officer</option>
+                                <option value="parent">Parent</option>
+                                <option value="self">Self Line</option>
+                                <option value="other">Other Line</option>
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="screen-buttons">
+                    <button id="btn-get-interpretation" class="btn-primary">Get Interpretation</button>
+                    <button id="btn-copy-interpretation" class="btn btn-secondary">Copy Interpretation</button>
+                    <button id="btn-show-ask-ai-text" class="btn-secondary">Show Ask AI Text</button>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- REVIEW SCREEN -->
+        <div id="screen-review" class="screen hidden">
+            <header class="screen-header">
+                <button id="btn-review-back" class="back-btn">←</button>
+                <h2>Review Reading</h2>
+                <button id="btn-review-home" class="home-btn"></button>
+            </header>
+            <div class="content">
+                <div class="review-content">
+                    <div class="ai-interpretation-display">
+                        <label for="ai-interpretation-text">AI Interpretation:</label>
+                        <textarea id="ai-interpretation-text" readonly></textarea>
+                    </div>
+                    <div class="user-notes">
+                        <label for="notes-text">Your Notes:</label>
+                        <textarea id="notes-text"></textarea>
+                    </div>
+                    <div class="rating-section">
+                        <label>Accuracy Rating (1-5):</label>
+                        <div class="star-rating" id="review-star-rating">
+                            <input type="radio" id="star5" name="rating" value="5">
+                            <label for="star5" class="star">★</label>
+
+                            <input type="radio" id="star4" name="rating" value="4">
+                            <label for="star4" class="star">★</label>
+
+                            <input type="radio" id="star3" name="rating" value="3">
+                            <label for="star3" class="star">★</label>
+
+                            <input type="radio" id="star2" name="rating" value="2">
+                            <label for="star2" class="star">★</label>
+
+                            <input type="radio" id="star1" name="rating" value="1">
+                            <label for="star1" class="star">★</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAST READINGS SCREEN -->
+        <div id="screen-past-readings" class="screen hidden">
+            <header class="screen-header">
+                <button id="btn-history-back" class="back-btn">←</button>
+                <h2>Past Readings</h2>
+                <button id="btn-history-home" class="home-btn"></button>
+            </header>
+            <div class="content">
+                <div class="past-readings-controls">
+                    <div class="sort-bar">
+                        <label>
+                            Sort by:
+                            <select id="sort-by">
+                                <option value="createdTimestamp">Date</option>
+                                <option value="accuracy">Rating</option>
+                            </select>
+                        </label>
+                        <label>
+                            Order:
+                            <select id="sort-order">
+                                <option value="desc">Newest</option>
+                                <option value="asc">Oldest</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="past-readings-list">
+                    <!-- Cards will be inserted here -->
+                </div>
+                <div class="past-readings-pagination">
+                    <span id="page-info">Page 1 of 1</span>
+                </div>
+
+                <div class="past-readings-admin">
+                    <button id="export-readings-btn" class="btn-secondary">Export Readings</button>
+                    <button id="import-readings-btn" class="btn-secondary">Import Readings</button>
+                    <input type="file" id="import-readings-input" accept="application/json" hidden>
+                    <button id="delete-all-readings-btn" class="btn-danger">Delete All</button>
+                </div>
+
+                <p class="empty-msg">No previous readings found.</p>
+            </div>
+        </div>
+
+        <!-- ABOUT SCREEN -->
+        <div id="screen-about" class="screen hidden">
+            <header class="screen-header">
+                <button id="btn-about-back" class="back-btn">←</button>
+                <h2>About</h2>
+                <button id="btn-about-home" class="home-btn"></button>
+            </header>
+
+            <div class="content about-text">
+                <p>Six Lines is a practical method of I Ching divination that uses six individual lines to form a hexagram. Each line carries meaning, movement, and relationships that reveal the deeper dynamics of a situation.</p>
+
+                <p>This method comes from the <strong>Wen Wang Gua tradition</strong>, a lineage that interprets the I Ching using stems, branches, families, and changing lines to create a detailed picture of timing, influences, and outcomes.</p>
+
+                <p>Six Lines is valued for its clarity. Instead of relying only on poetic text, it analyzes the structure of the hexagram itself — the energies, interactions, and transformations happening beneath the surface.</p>
+
+                <p>This application serves as a tool that charts Six Lines hexagrams according to the Wen Wang Gua system and provides AI‑assisted interpretations based on the chart’s structure. It offers a precise and accessible way to explore this traditional method without replacing classical study or practice.</p>
+            </div>
+        </div>
+
+
+        <!-- SETTINGS SCREEN -->
+        <div id="screen-settings" class="screen hidden">
+            <header class="screen-header">
+                <button id="btn-settings-back" class="back-btn">←</button>
+                <h2>Settings</h2>
+                <button id="btn-settings-home" class="home-btn"></button>
+            </header>
+            <div class="content">
+                <div class="setting-item">
+                    <span>App Version</span>
+                    <small>1.0.0</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- HELP SCREEN -->
+        <div id="screen-help" class="screen hidden">
+            <header class="screen-header">
+                <button id="btn-help-back" class="back-btn">←</button>
+                <h2>Help</h2>
+                <button id="btn-help-home" class="home-btn"></button>
+            </header>
+            <div class="content">
+                <p>Focus your intent before consulting the oracle. Traditional divination requires a quiet mind.</p>
+            </div>
+        </div>
+
+        <!-- POPUP MODAL -->
+        <div id="popup-how-to" class="popup-overlay hidden">
+            <div class="popup-content">
+                <h3>How to Cast</h3>
+                <div class="popup-scroll">
+                    <p><strong>1. Focus:</strong> Clear your mind and focus intently on your question.</p>
+                    <p><strong>2. Three Coins:</strong> Take three identical coins. Toss them together six times.</p>
+                    <p><strong>3. Record:</strong> The <strong>first toss</strong> represents the <strong>bottom line</strong> (Line 1). Subsequent tosses build the hexagram upwards to Line 6.</p>
+                    <p>
+                        <strong>4. Values:</strong>
+                        <ul>
+                            <li>3 Tails: Old Yin (Changing)</li>
+                            <li>1 Head, 2 Tails: Young Yang</li>
+                            <li>2 Heads, 1 Tail: Young Yin</li>
+                            <li>3 Heads: Old Yang (Changing)</li>
+                        </ul>
+                    </p>
+                </div>
+                <div class="screen-buttons popup-buttons">
+                    <button id="btn-popup-close" class="btn-primary">I Understand</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ASK AI TEXT POPUP -->
+        <div id="popup-ask-ai-text" class="popup-overlay hidden">
+            <div class="popup-content">
+                <h3>Ask AI Text</h3>
+                <div class="popup-scroll">
+                    <textarea id="popup-ask-ai-text-text" readonly></textarea>
+                </div>
+                <div class="screen-buttons popup-buttons">
+                    <button id="btn-copy-ask-ai-text" class="btn-secondary">Copy</button>
+                    <button id="btn-popup-close-ask-ai-text" class="btn-primary">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- DELETE CONFIRMATION POPUP -->
+        <div id="popup-confirm" class="popup-overlay hidden">
+            <div class="popup-content">
+                <h3>Confirm</h3>
+                <p id="popup-confirm-text">Are you sure?</p>
+
+                <div class="popup-buttons">
+                    <button id="popup-confirm-cancel" class="btn btn-secondary">
+                        Cancel
+                    </button>
+                    <button id="popup-confirm-ok" class="btn btn-primary">
+                        Confirm
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/main.js?v=20260628"></script>
+</body>
+</html>

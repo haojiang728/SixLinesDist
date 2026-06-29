@@ -1,0 +1,237 @@
+﻿/* Chart-specific layout and hexagram display */
+
+.chart-header {
+    margin-bottom: var(--space-4);
+}
+
+/* NEW: wrapper for Casting Date + Pillars */
+.chart-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.question-block {
+    padding: var(--space-2);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-3);
+    color: var(--color-text-primary);
+    line-height: 1.25;
+    white-space: pre-line;
+    word-wrap: break-word;
+    max-height: 110px;
+    overflow-y: auto;
+    font-size: var(--fs-xs);
+}
+
+.cast-time,
+.pillar-line {
+    margin-bottom: var(--space-3);
+    font-size: var(--fs-xs);
+}
+
+.chart-body {
+    display: grid;
+    grid-template-columns: 70px 1fr 1fr;
+    gap: var(--space-3);
+    align-items: start;
+}
+
+.spirits-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.05rem;
+    padding-top: 0;
+}
+
+.spirit-spacer {
+    height: 1.2rem;
+}
+
+.spirit-row {
+    height: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-weight: 600;
+    font-size: var(--fs-xs);
+    color: var(--color-text-primary);
+    padding-right: 0.25rem;
+}
+
+.hexagram-card {
+    padding: 0;
+    margin: 0 var(--space-2);
+}
+
+.hex-title {
+    height: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: var(--fs-sm);
+    color: var(--color-text-primary);
+    text-align: center;
+}
+
+.hexagram-block {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.hexagram-header,
+.hexagram-footer {
+    width: fit-content;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.hexagram-header {
+    margin-bottom: 0.25rem;
+}
+
+.hexagram-footer {
+    margin-top: 0.25rem;
+}
+
+.hex-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 0.05rem;
+}
+
+.hex-line-primary,
+.hex-line-changed {
+    min-height: 1.4rem;
+    display: grid;
+    align-items: center;
+    color: var(--color-text-primary);
+    font-size: var(--fs-xs);
+    gap: 0.15rem;
+}
+
+.hex-line-primary {
+    grid-template-columns: 28px 32px 28px 40px 52px 20px;
+}
+
+.hex-line-changed {
+    grid-template-columns: 28px 32px 28px 40px 52px 20px;
+}
+
+.line-crouching-relative,
+.line-crouching-branch,
+.line-relative,
+.line-branch,
+.line-marker {
+    text-align: center;
+    font-size: var(--fs-xxs);
+    opacity: 0.85;
+}
+
+.line-drawing {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    text-align: center;
+}
+
+.special-footer {
+    text-align: center;
+    margin-top: 0.25rem;
+    font-style: italic;
+    color: var(--color-text-muted);
+    font-size: var(--fs-xxs);
+}
+
+.chart-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-top: var(--space-4);
+    margin-bottom: var(--space-3);
+}
+
+.ai-interpretation-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.ask-ai-text {
+    width: 100%;
+    margin: 0.25rem 0;
+    min-height: 45vh;
+    padding: var(--space-3);
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    line-height: 1.25;
+    color: var(--color-text-primary);
+    background: var(--color-surface-muted);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    resize: vertical;
+    overflow: auto;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.ask-ai-text:focus {
+    border-color: var(--color-border-strong);
+    outline: none;
+}
+
+/* ------------------------------
+   STACKED MODE (mobile / narrow)
+   ------------------------------ */
+@media (max-width: 550px) {
+    .chart-body {
+        grid-template-columns: 70px 1fr;
+        grid-template-rows: auto auto;
+        gap: 0.75rem;
+    }
+
+    .spirits-column.secondary-spirits {
+        display: flex;
+    }
+
+    .changed-hex {
+        grid-column: 2;
+        grid-row: 2;
+    }
+
+    /* NEW: smaller metadata font in stacked mode */
+    .chart-meta,
+    .chart-meta .label,
+    .chart-meta .value,
+    .cast-time,
+    .pillar-line {
+        font-size: var(--fs-xxs);
+        line-height: 1.1;
+    }
+}
+
+/* ------------------------------
+   HORIZONTAL MODE (desktop / wide)
+   ------------------------------ */
+@media (min-width: 550px) {
+    /* NEW: slightly larger metadata font in horizontal mode */
+    .chart-meta,
+    .chart-meta .label,
+    .chart-meta .value,
+    .cast-time,
+    .pillar-line {
+        font-size: var(--fs-xs);
+        line-height: 1.2;
+    }
+}
+
+.spirits-column.secondary-spirits {
+    display: none;
+}
+
+.placeholder {
+    visibility: hidden;
+}
